@@ -1,8 +1,15 @@
 //import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pop_app/core/constants.dart';
 //import 'package:my_app/core/widgets/custom_buttom.dart';
 import 'package:pop_app/core/widgets/text_labal.dart';
+import 'package:pop_app/features/login/presentation/login_view.dart';
+
+import '../../../../core/widgets/custom_buttom.dart';
+import '../../../HomePage/presentation/HomePage.dart';
 //import 'package:my_app/features/HomePage/presentation/HomePage.dart';
 //import 'package:get/get.dart';
 
@@ -46,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter Email Id", Icons.person_outline, false,
+                reusableTextField("Enter Email ", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
                   height: 20,
@@ -56,11 +63,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-              //signinandsignup(context, false, (){
-                //FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
-                    // Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
-                //});
-              //})
+              signinandsignup(context, false, (){
+                FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
+                     Get.to(()=> const LoginView(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+                });
+              })
               ],
             ),
               ),

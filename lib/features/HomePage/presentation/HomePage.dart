@@ -6,6 +6,6 @@ class homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: homepagebody(),);
+    return const Scaffold(body: HomePagebody(),);
   }
 }

@@ -35,18 +35,18 @@ class Splashbody extends StatefulWidget {
       child:  Column(
         mainAxisAlignment :MainAxisAlignment.center,
         children: [
-          const Spacer(),
+          Image.asset('assets/images/SplashView.png'),
           FadeTransition(opacity: fading,
-          child:const Text("Gamers Area",
+          child:const Text("TicKet",
           style: TextStyle(
-            fontFamily: 'Poppins',
+            fontFamily: "Valorax",
             fontSize: 48,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           )
            ),
           ),
-          Image.asset('assets/images/SplashView.png')
+
         ],
       ),
     );
