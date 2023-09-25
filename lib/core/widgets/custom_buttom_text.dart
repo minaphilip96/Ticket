@@ -11,8 +11,7 @@ class BottomText extends StatefulWidget {
 class _BottomTextState extends State<BottomText> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
-    body: Stack(
+    return Stack(
         children: <Widget>[
           Align(
             alignment: Alignment.bottomLeft,
@@ -59,7 +58,7 @@ class _BottomTextState extends State<BottomText> {
             ),
           ),
         ],
-      ),
-    );
+      );
+  
   }
 }
