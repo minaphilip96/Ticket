@@ -60,13 +60,14 @@ class _HomePagebodyState extends State<HomePagebody> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.message,
+                
               ),
                 label:"Chat"
             ),
 
             BottomNavigationBarItem(
               icon: Icon(
-
+                
                 Icons.group,
               ),
                   label:"Friends"
