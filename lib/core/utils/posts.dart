@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_app/core/constants.dart';
 
 class PostItem extends StatefulWidget {
   final String dp;
@@ -22,32 +23,55 @@ class _PostItemState extends State<PostItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
         child: Column(
           children: <Widget>[
             ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(
-                  "${widget.dp}",
-                ),
+              
+              title: Text("${widget.time}",
+              style: TextStyle(
+                color: kMainColor,
+                fontWeight: FontWeight.w300,
+                fontSize: 11
               ),
-
-              contentPadding: EdgeInsets.all(0),
-              title: Text(
+              ),
+              
+              contentPadding:EdgeInsets.all(0),
+              leading: 
+              Text(
                 "${widget.name}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),  
               ),
-              trailing: Text(
-                "${widget.time}",
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 11,
-                ),
+                
+              
+              trailing:GestureDetector( 
+      onTap: (){},
+      child: Container(
+        height: 40,
+        width: 50,
+        decoration: BoxDecoration(
+          color: kMainColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child:Center(
+         child: Text(
+           'Ticket',
+            style: const TextStyle(
+              fontSize: 14,
+              color: Color(0xffffffff),
+              fontWeight: FontWeight.bold,
+            ),
+        ),
+      ),
+        
               ),
-              subtitle: Text('sgdfsgsdfkjhsfjidghfidjghfdjghfdj'),
+              ),
+
+
+          subtitle: Text('sgdfsgsdfkjhsfjidghfidjghfdjghfdj'),
             ),
 
     

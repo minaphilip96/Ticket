@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/widgets/Chat_items.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:pop_app/model/backend.dart';
 
 class Chats extends StatefulWidget {
   @override
@@ -117,12 +120,15 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
           ),
         ],
       ),
+      
 
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add,
         ),
-        onPressed: (){},
+        onPressed: 
+        null
+        
       ),
     );
   }

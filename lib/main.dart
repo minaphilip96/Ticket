@@ -28,14 +28,7 @@ class MyApp extends StatelessWidget {
     );
     
   }
+
 }
-void _createData() {
-  final databaseReference = FirebaseDatabase.instance.ref();
-  databaseReference.child("flutterDevsTeam1").set({
-    'name': 'Deepak Nishad',
-    'description': 'Team Lead'
-    
-  });
-   
-  }
+
 
