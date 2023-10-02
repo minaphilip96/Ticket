@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
 
-class AppBarForChat extends StatelessWidget {
-  const AppBarForChat({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
+AppBar chatAppbar(context){
+  return AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
@@ -43,8 +38,6 @@ class AppBarForChat extends StatelessWidget {
             ),
           ),
         ),
-      ),
-      body: Container()
-    );
-  }
+      );
+   
 }

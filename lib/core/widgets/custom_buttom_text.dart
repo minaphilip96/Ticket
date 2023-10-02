@@ -9,10 +9,10 @@ class BottomText extends StatefulWidget {
 }
 
 class _BottomTextState extends State<BottomText> {
+   final TextEditingController _messengeTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
-    body: Stack(
+    return Stack(
         children: <Widget>[
           Align(
             alignment: Alignment.bottomLeft,
@@ -39,6 +39,7 @@ class _BottomTextState extends State<BottomText> {
                   SizedBox(width: 15,),
                   Expanded(
                     child: TextField(
+                      controller:_messengeTextController ,
                       decoration: InputDecoration(
                         hintText: "Write message...",
                         hintStyle: TextStyle(color: Colors.white),
@@ -59,7 +60,7 @@ class _BottomTextState extends State<BottomText> {
             ),
           ),
         ],
-      ),
-    );
+      );
+  
   }
 }

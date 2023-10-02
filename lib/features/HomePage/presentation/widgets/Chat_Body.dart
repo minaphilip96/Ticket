@@ -12,11 +12,13 @@ class ChatBody extends StatefulWidget {
 class _ChatBodyState extends State<ChatBody> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Stack(
+    return  Scaffold(
+      appBar: chatAppbar(context),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
         children:<Widget>[
-          BottomText(), 
-          AppBarForChat()
+      
+            BottomText(), 
         ],
         ),
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pop_app/core/constants.dart';
+import 'package:pop_app/core/utils/size_config.dart';
+import 'package:pop_app/core/widgets/custom_buttom.dart';
 
 class PostItem extends StatefulWidget {
   final String dp;
@@ -22,16 +25,18 @@ class _PostItemState extends State<PostItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 20),
       child: InkWell(
         child: Column(
           children: <Widget>[
             ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(
-                  "${widget.dp}",
-                ),
+              leading:Text("${widget.time}",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.w300,
+                fontSize: 11
               ),
+              ), 
 
               contentPadding: EdgeInsets.all(0),
               title: Text(
@@ -40,16 +45,46 @@ class _PostItemState extends State<PostItem> {
                   fontWeight: FontWeight.bold,
                 ),  
               ),
-              trailing: Text(
-                "${widget.time}",
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 11,
-                ),
-              ),
-              subtitle: Text('sgdfsgsdfkjhsfjidghfidjghfdjghfdj'),
+      
+      trailing: GestureDetector( 
+      onTap: (){},
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          color: kMainColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text(
+            'Ticket',
+            style: const TextStyle(
+              fontSize: 14,
+              color: Color(0xffffffff),
+              fontWeight: FontWeight.w500,
             ),
-
+            textAlign: TextAlign.left,
+          )
+          ),
+        ),
+      ),
+              subtitle:
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 10, 3, 10),
+                child:Text("asdjasdjioadsjioadijssdaijodiosjaj",
+                style: TextStyle(fontWeight: FontWeight.bold,
+                fontSize: 17
+                ),
+                ),
+                ),
+              
+            ),
+        Divider(
+            indent: 3,
+            thickness: 2,
+            color: Colors.grey,
+            endIndent: 3,
+        ),
     
 
           ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/Loding.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/utils/posts.dart';
+import 'package:pop_app/features/Createpost/presentation/Create_post.dart';
 
 
 class Home extends StatefulWidget {
@@ -20,7 +22,7 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.filter_list,
+              Icons.search,
             ),
             onPressed: (){},
           ),
@@ -42,14 +44,14 @@ class _HomeState extends State<Home> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:  FloatingActionButton(
         backgroundColor: kMainColor,
         child: Icon(
           Icons.add,
         ),
-        onPressed: (){
-                  LoadingItem();
-        },
+        onPressed:(){ 
+        Get.to(()=>  CreatePost(),transition:Transition.rightToLeft,duration:  Duration(milliseconds: 500));
+        }
       ),
     );
   }
