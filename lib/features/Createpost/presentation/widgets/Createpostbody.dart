@@ -3,6 +3,12 @@ import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/features/HomePage/presentation/HomePage.dart';
 
+const List<String> list = <String>['Valorant', 'Call of duty warzone', 'League of legends', 'Pubg mobile'];
+const List<String> numbers = <String>['1', '2', '3', '4','5','6','7','8','9','10'];
+ List<String> players = <String>[];
+
+ 
+
 class CreatePostBody extends StatefulWidget {
   const CreatePostBody({super.key});
 
@@ -11,7 +17,8 @@ class CreatePostBody extends StatefulWidget {
 }
 
 class _CreatePostBodyState extends State<CreatePostBody> {
-   final TextEditingController _postTextController = TextEditingController();
+ String dropdownValue = list.first;
+  final TextEditingController _postTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -48,11 +55,20 @@ class _CreatePostBodyState extends State<CreatePostBody> {
       ),
     body: Column(
       children:[
-        SizedBox(height: 15,),
+        Container(
+        height: 150,
+        width: 350,
+        child: Image.asset(kLogo),),
+    Container(
+      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child:
         TextField(
     controller: _postTextController,
     cursorColor: Colors.white,
-    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+    style: TextStyle(color: Colors.white.withOpacity(0.9),
+    fontFamily: 'informal',
+    fontSize: 12
+    ),
     decoration: InputDecoration(
       prefixIcon: Icon(
         Icons.post_add_outlined,
@@ -64,20 +80,81 @@ class _CreatePostBodyState extends State<CreatePostBody> {
       floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: Colors.white.withOpacity(0.3),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
     ),
     maxLines: 5,
     maxLength: 120,
   ),
-      Container(
-        margin: EdgeInsets.all(50),
-        height: 200,
-        width: 200,
-        child: Image.asset(kLogo),)
+    ),
+    SizedBox(height: 10,),
+  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children:[
+  Container(
+    height: 50,
+    child:
+DropdownMenu<String>(
+  label: const Text('Games',
+  style: TextStyle(color:Colors.white ),
+  ),
+  trailingIcon: const Icon(Icons.games_outlined),
+  width: 180,
+      initialSelection: list.first,
+      onSelected: (String? value) {
+        setState(() {
+          dropdownValue = value!;
+          select_game(dropdownValue);
+        });
+      },
+      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+        return DropdownMenuEntry<String>(value: value, label: value);
+      }).toList()
+    ),
+  ),
+  Container(
+    margin: EdgeInsets.fromLTRB(50, 0, 0, 0),
+    height: 50,
+    child:
+DropdownMenu<String>(
+  label: const Text('Players',
+  style: TextStyle(color:Colors.white ),),
+  trailingIcon: const Icon(Icons.people_outline),
+  width: 150,
+      initialSelection: numbers.first,
+      onSelected: (String? value) {
+        setState(() {
+          dropdownValue = value!;
+          select_game(dropdownValue);
+          print(players);
+        });
+      },
+      dropdownMenuEntries: players.map<DropdownMenuEntry<String>>((String value) {
+        return DropdownMenuEntry<String>(value: value, label: value);
+      }).toList()
+    ),
+  ),
+    ],
+  ),
       ],
     ),
 
     );
   }
+}
+
+void select_game(item){
+  if (item=='Valorant'){
+      players= List.from(numbers.sublist(0,3));
+  }
+  else if (item=='Call of duty warzone'){
+     players= List.from(numbers.sublist(0,3));
+  }
+  else if (item=='League of legends'){
+     players= List.from(numbers.sublist(0,4));
+  }
+  else if (item=='Pubg mobile'){
+     players= List.from(numbers.sublist(0,3));
+  }
+  
 }

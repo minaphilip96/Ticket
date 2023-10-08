@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 
 
@@ -34,9 +35,9 @@ class _ChatItemState extends State<ChatItem> {
         contentPadding: EdgeInsets.all(0),
         leading: Stack(
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage: AssetImage(
-                "${widget.dp}",
+               kIcon ,
               ),
               radius: 25,
             ),

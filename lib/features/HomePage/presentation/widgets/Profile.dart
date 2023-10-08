@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_app/core/constants.dart';
 import 'dart:math';
 
 import 'package:pop_app/core/utils/data.dart';
@@ -26,7 +27,7 @@ class _ProfileState extends State<Profile> {
               SizedBox(height: 40),
               CircleAvatar(
                 backgroundImage: AssetImage(
-                  "assets/cm${random.nextInt(10)}.jpeg",
+                  kIcon,
                 ),
                 radius: 50,
               ),

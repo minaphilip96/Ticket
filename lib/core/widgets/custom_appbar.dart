@@ -20,6 +20,7 @@ AppBar chatAppbar(context){
                 SizedBox(width: 2,),
                 CircleAvatar(
                   maxRadius: 20,
+                backgroundImage: AssetImage(kIcon),
                 ),
                 SizedBox(width: 12,),
                 Expanded(

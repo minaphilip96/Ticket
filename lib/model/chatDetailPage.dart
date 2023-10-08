@@ -8,3 +8,4 @@ List<ChatMessage> messages = [
     ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
+  

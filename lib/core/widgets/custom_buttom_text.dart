@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/ChatBubble.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 
 class BottomText extends StatefulWidget {
   const BottomText({super.key});
@@ -49,7 +52,11 @@ class _BottomTextState extends State<BottomText> {
                   ),
                   SizedBox(width: 15,),
                   FloatingActionButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      //Navigator.push(context,
+                      //Material(builder: (context)=>ChatBubble(text: _messengeTextController.text.toString(), isCurrentUser: true))
+                      //);
+                    },
                     child: Icon(Icons.send,color: Colors.white,size: 18,),
                     backgroundColor: kMainColor,
                     elevation: 0,

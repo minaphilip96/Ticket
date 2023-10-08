@@ -49,7 +49,7 @@ class _PostItemState extends State<PostItem> {
       trailing: GestureDetector( 
       onTap: (){},
       child: Container(
-        height: 50,
+        height: 40,
         width: 50,
         decoration: BoxDecoration(
           color: kMainColor,

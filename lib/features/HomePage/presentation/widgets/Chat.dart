@@ -119,12 +119,7 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-        ),
-        onPressed: (){},
-      ),
+      
     );
   }
 
