@@ -65,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               signinandsignup(context, false, (){
                 FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
+                  
                      Get.to(()=> const LoginView(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
                 });
               })

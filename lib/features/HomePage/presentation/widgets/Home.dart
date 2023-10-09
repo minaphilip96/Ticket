@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feeds"),
+        title: Text("data"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -48,8 +48,8 @@ class _HomeState extends State<Home> {
         child: Icon(
           Icons.add,
         ),
-        onPressed: 
-             groupbranch,
+        onPressed:  
+             read,
         
       ),
     );

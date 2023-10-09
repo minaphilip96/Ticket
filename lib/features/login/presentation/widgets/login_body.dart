@@ -20,11 +20,13 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
+  GlobalKey<ScaffoldState> snackkey = GlobalKey<ScaffoldState>();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: snackkey,
       backgroundColor: kMainColor,
       body: SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -52,9 +54,9 @@ class _LoginBodyState extends State<LoginBody> {
           ,const SizedBox(
             height: 20),
             signinandsignup(context, true, (){
-              FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
-               Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
-              });
+              
+              auth(_emailTextController, _passwordTextController,snackkey);
+              
           },
             ) ,
             signUpOption()
@@ -86,5 +88,23 @@ class _LoginBodyState extends State<LoginBody> {
   }
  }  
 
-        
+
+void auth (_emailTextController,_passwordTextController,snackkey)async{
+    try {
+  await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: _emailTextController.text,
+    password: _passwordTextController.text,
+  );
+  Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+} on FirebaseAuthException catch  (e) {
   
+  Get.snackbar("ERROR" ,"Please Check Your E-mail And Password And Try Again,Check If You Registred With This E-mail",
+  icon: Icon(Icons.close,size: 40,color: Colors.white),
+  maxWidth: double.infinity,
+  snackPosition: SnackPosition.BOTTOM,
+  backgroundColor: Color.fromARGB(191, 124, 8, 0),
+  colorText: Colors.white,
+  );
+}
+}
+        
