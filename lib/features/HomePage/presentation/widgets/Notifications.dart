@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/data.dart';
 
 class Notifications extends StatefulWidget {
@@ -45,7 +46,7 @@ class _NotificationsState extends State<Notifications> {
             child: ListTile(
               leading: CircleAvatar(
                 backgroundImage: AssetImage(
-                  notif['dp'],
+                  kIcon,
                 ),
                 radius: 25,
               ),

@@ -20,7 +20,7 @@ class _ChatBodyState extends State<ChatBody> {
         children:<Widget>[
             ChatBubble(text: 'mina', isCurrentUser: true),
              ChatBubble(text: 'n3m', isCurrentUser: false),
-                          ChatBubble(text: 'adham', isCurrentUser: true),
+              ChatBubble(text: 'adham', isCurrentUser: true),
             BottomText(), 
         ],
         ),
