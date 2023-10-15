@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 //firestore imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
+import 'package:pop_app/core/utils/data.dart';
+import 'package:pop_app/features/HomePage/presentation/HomePage.dart';
+var userid;
 //REAL_TIME DATABASE
 //post function and all its branches
 
@@ -12,20 +14,23 @@ class chatservice extends ChangeNotifier{
   
 }
 
-void createpost(postId) {
+void createpost(String body,String owner,String game, String players) {
+   
   final postsReference = FirebaseDatabase.instance.ref("posts");
   DatabaseReference newpost= postsReference.push();
   newpost.set({
-  "title": "null",
-  "body":"null",
-  "owner":"null",
+  "body":body,
+  "owner":owner,
+  "game": game,
+  "players": players,
+  "time":DateTime.now().toString()
 });
   
-    final postbranchReference = FirebaseDatabase.instance.ref("/posts/$postId/members");
+    final postbranchReference = FirebaseDatabase.instance.ref("${newpost.path}/members");
     postbranchReference.set({
       "owner":"account-id"
     });
-
+  Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
   }
 
   void members(postId) {
@@ -64,14 +69,14 @@ void message(String postId) {
 //read functions
 
 
-List posts2=[];
+List list_posts=[];
 void  getpost() async {
-    posts2.clear();
-    DataSnapshot posts = await FirebaseDatabase.instance.ref().get();
+    list_posts.clear();
+    DataSnapshot posts = await FirebaseDatabase.instance.ref('posts').get();
 
          for (var element in posts.children) {
-          posts2.add(element);
-          print(element.value);
+          list_posts.add(element);
+          print(list_posts.length);
       }
 
 }
@@ -89,34 +94,31 @@ void getgroup() async {
 }
 
 //END OF REALTIME DATABSE
-Future<void> test2(){
+Future<void> createuser(String name){
 
 
 CollectionReference users = FirebaseFirestore.instance.collection("users");
-
       return users
           .add({
-            'name': "fullName", 
+            'name': name, 
             'image': "value?",
-            'age': "22" ,
             'bio': "value" 
           })
-          .then((value) => print("User Added"))
+          .then((DocumentReference usersdocument) => userid=usersdocument.id)
           .catchError((error) => print("Failed to add user: $error"));
     
 }
- var db;
- dynamic lol;
-void read(){
- db = FirebaseFirestore.instance;
-final docRef = db.collection("users").doc("N4SbmCPDInfmeyJrSgt8");
+ var users;
+ dynamic userdata;
+void readuser(userid){
+ users = FirebaseFirestore.instance;
+final docRef = users.collection("users").doc(userid);
 docRef.get().then(
   (DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-
+    userdata=data;
+    print(userdata);
   },
-  
-  
 );
 }
 //FIRESTORE DATABASE

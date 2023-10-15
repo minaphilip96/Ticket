@@ -6,5 +6,6 @@ const kName = 'name';
 const kAddress = 'address';
 
 const kEmail = 'email';
+const kIcon = 'assets/images/persons.PNG';
 
 const kPhoneNumber = 'phone number';

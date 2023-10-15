@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
 //import 'package:my_app/core/widgets/custom_buttom.dart';
-
+import 'package:pop_app/model/backend.dart';
+import 'package:pop_app/features/login/presentation/widgets/signup.dart';
 import 'package:pop_app/core/widgets/text_labal.dart';
 //import 'package:my_app/features/HomePage/presentation/HomePage.dart';
 import 'package:pop_app/features/login/presentation/widgets/signup.dart';
@@ -54,7 +55,7 @@ class _LoginBodyState extends State<LoginBody> {
           ,const SizedBox(
             height: 20),
             signinandsignup(context, true, (){
-              
+              readuser(userid);
               auth(_emailTextController, _passwordTextController,snackkey);
               
           },
@@ -76,7 +77,8 @@ class _LoginBodyState extends State<LoginBody> {
             style: TextStyle(color: Colors.white70)),
         GestureDetector(
           onTap: () {
-               Get.to(()=> const SignUpScreen(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+                
+               Get.to(()=>  SignUpScreen(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
           },
           child: const Text(
             " Sign Up",
