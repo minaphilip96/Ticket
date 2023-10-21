@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/size_config.dart';
 import 'package:pop_app/core/widgets/custom_buttom.dart';
+import 'package:pop_app/model/backend.dart';
 
 class PostItem extends StatefulWidget {
   final String dp;
   final String name;
   final String time;
   final String img;
+  final int  index; 
 
 
   PostItem({
@@ -15,7 +17,8 @@ class PostItem extends StatefulWidget {
     required this.dp,
     required this.name,
     required this.time,
-    required this.img
+    required this.img,
+    required this.index,
   }) : super(key: key);
   @override
   _PostItemState createState() => _PostItemState();
@@ -41,7 +44,9 @@ class _PostItemState extends State<PostItem> {
               ),
       
       trailing: GestureDetector( 
-      onTap: (){},
+      onTap: (){
+      add_player(list_posts[widget.index].key);
+      },
       child: Container(
         height: 40,
         width: 50,

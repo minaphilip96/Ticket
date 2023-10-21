@@ -47,6 +47,7 @@ class _HomeState extends State<Home> {
           dynamic post = list_posts[index].value;
           print(post);
           return PostItem(
+            index: index,
             img: post['img']??'',
             name: post['owner']??'',
             dp: post['body']??'',
@@ -59,8 +60,10 @@ class _HomeState extends State<Home> {
         child: Icon(
           Icons.add,
         ),
-        onPressed : ()=> 
-             Get.to(()=> CreatePost()),
+        onPressed : ()=>
+            //readuser(userid)
+            //readmessages(messageid)
+            Get.to(()=> CreatePost()),
         
       ),
     );
