@@ -8,6 +8,7 @@ import 'package:pop_app/core/widgets/text_labal.dart';
 //import 'package:my_app/features/HomePage/presentation/HomePage.dart';
 import 'package:pop_app/features/login/presentation/widgets/signup.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/widgets/custom_buttom.dart';
 import '../../../HomePage/presentation/HomePage.dart';
@@ -51,7 +52,9 @@ class _LoginBodyState extends State<LoginBody> {
             height: 5,)
           ,const SizedBox(
             height: 20),
-            signinandsignup(context, true, (){
+            signinandsignup(context, true, ()async{
+               final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                sharedPreferences.setString('email', _emailTextController.text);
               FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
                Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
               });

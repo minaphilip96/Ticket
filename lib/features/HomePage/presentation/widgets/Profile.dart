@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'dart:math';
 
 import 'package:pop_app/core/utils/data.dart';
+import 'package:pop_app/features/Edit_profile/presentation/edit.dart';
 
 
 class Profile extends StatefulWidget {
@@ -52,10 +54,13 @@ class _ProfileState extends State<Profile> {
                 children: <Widget>[
                   TextButton(
                     child: Icon(
-                      Icons.message,
+                      Icons.note_alt_rounded,
                       color: Colors.white,
                     ),
-                    onPressed: (){},
+                    onPressed: (){
+                   Get.to(()=> const Edit_profile(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+                   
+                    },
                   ),
                   SizedBox(width: 10),
                   TextButton(
