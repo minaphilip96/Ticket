@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/size_config.dart';
@@ -8,6 +9,8 @@ class PostItem extends StatefulWidget {
   final String name;
   final String time;
   final String img;
+  final int index;
+
 
 
   PostItem({
@@ -15,7 +18,8 @@ class PostItem extends StatefulWidget {
     required this.dp,
     required this.name,
     required this.time,
-    required this.img
+    required this.img,
+    required this.index,
   }) : super(key: key);
   @override
   _PostItemState createState() => _PostItemState();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
+import 'package:pop_app/model/backend.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({

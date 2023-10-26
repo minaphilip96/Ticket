@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/widgets/Chat_items.dart';
 import 'package:firebase_core/firebase_core.dart';
