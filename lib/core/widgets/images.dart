@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
 
           Map post = posts[index];
           return PostItem(
+            index: index,
             img: post['img'],
             name: post['name'],
             dp: post['dp'],

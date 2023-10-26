@@ -4,6 +4,7 @@ import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/features/HomePage/presentation/HomePage.dart';
 import 'package:pop_app/model/backend.dart';
 String gameValue="";
+var playerValue;
 const List<String> list = <String>['Valorant', 'Call of duty warzone', 'League of legends', 'Pubg mobile'];
 const List<String> numbers = <String>['1', '2', '3', '4','5','6','7','8','9','10'];
  List<String> players = <String>[];
@@ -42,7 +43,7 @@ class _CreatePostBodyState extends State<CreatePostBody> {
         child: Center(
           child: TextButton(
             child: Text('POST',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-            onPressed: () => createpost(_postTextController.text, "hi", gameValue, dropdownValue),
+            onPressed: () => createpost(_postTextController.text, gameValue, dropdownValue),
             
             )
         ),
@@ -106,7 +107,7 @@ DropdownMenu<String>(
       onSelected: (String? value) {
         setState(() {
           gameValue = value!;
-          select_game(dropdownValue);
+          select_game(gameValue);
         });
       },
       dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
@@ -126,8 +127,7 @@ DropdownMenu<String>(
       initialSelection: numbers.first,
       onSelected: (String? value) {
         setState(() {
-          dropdownValue = value!;
-          select_game(dropdownValue);
+          playerValue = value!;
           print(players);
         });
       },
@@ -147,7 +147,8 @@ DropdownMenu<String>(
 
 void select_game(item){
   if (item=='Valorant'){
-      players= List.from(numbers.sublist(0,3));
+      players= List.from(numbers.sublist(0,4));
+      print(playerValue);
   }
   else if (item=='Call of duty warzone'){
      players= List.from(numbers.sublist(0,3));

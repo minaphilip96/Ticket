@@ -66,12 +66,15 @@ class _BottomTextState extends State<BottomText> {
                     // Material(child: (context)=>ChatBubble(text: _messengeTextController.text.toString(), isCurrentUser: true)) as Route<Object?>
                     // );
                     message(
-                        list_posts[index.key],
+                        // list_posts[index.key],
+                        //this just a random post from the db
+                        '-NhfoHsA-hQisC0r3_WZ',
                         _messengeTextController.text.toString());
                     ChatBubble(
                       text: _messengeTextController.text.toString(),
                       isCurrentUser: true,
                     );
+                    // this is the read function 
                     get_message('-NhfRXV69ucUVGF2zrcR');
                   },
                   child: Icon(
