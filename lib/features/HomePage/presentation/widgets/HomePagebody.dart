@@ -31,7 +31,6 @@ class _HomePagebodyState extends State<HomePagebody> {
         onPageChanged: onPageChanged,
         children: <Widget>[
           Chats(),
-          Friends(),
           Home(),
           Notifications(),
           Profile(),
@@ -60,17 +59,12 @@ class _HomePagebodyState extends State<HomePagebody> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.message,
+                
               ),
                 label:"Chat"
             ),
 
-            BottomNavigationBarItem(
-              icon: Icon(
-
-                Icons.group,
-              ),
-                  label:"Friends"
-            ),
+           
 
             BottomNavigationBarItem(
               icon: Icon(

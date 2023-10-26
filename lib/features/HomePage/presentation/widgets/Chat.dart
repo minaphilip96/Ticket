@@ -1,8 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/widgets/Chat_items.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:pop_app/model/backend.dart';
 
 class Chats extends StatefulWidget {
   @override
@@ -16,7 +20,7 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 1);
   }
 
 
@@ -52,9 +56,7 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
           unselectedLabelColor: Theme.of(context).textTheme.caption!.color,
           isScrollable: false,
           tabs: <Widget>[
-            Tab(
-              text: "Message",
-            ),
+           
             Tab(
               text: "Groups",
             ),
@@ -65,31 +67,34 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          ListView.separated(
-            padding: EdgeInsets.all(10),
-            separatorBuilder: (BuildContext context, int index) {
-              return Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  height: 0.5,
-                  width: MediaQuery.of(context).size.width / 1.3,
-                  child: Divider(),
-                ),
-              );
-            },
-            itemCount: chats.length,
-            itemBuilder: (BuildContext context, int index) {
-              Map chat = chats[index];
-              return ChatItem(
-                dp: chat['dp'],
-                name: chat['name'],
-                isOnline: chat['isOnline'],
-                counter: chat['counter'],
-                msg: chat['msg'],
-                time: chat['time'],
-              );
-            },
-          ),
+          // ListView.separated(
+          //   padding: EdgeInsets.all(10),
+          //   separatorBuilder: (BuildContext context, int index) {
+          //     return Align(
+          //       alignment: Alignment.centerRight,
+          //       child: Container(
+          //         height: 0.5,
+          //         width: MediaQuery.of(context).size.width / 1.3,
+          //         child: Divider(),
+          //       ),
+          //     );
+          //   },
+          //   itemCount: chats.length,
+          //   itemBuilder: (BuildContext context, int index) {
+          //     Map chat = chats[index];
+          //     return ChatItem(
+          //       dp: chat['dp'],
+          //       name: chat['name'],
+          //       isOnline: chat['isOnline'],
+          //       counter: chat['counter'],
+          //       msg: chat['msg'],
+          //       time: chat['time'],
+          //     );
+          //   },
+          // ),
+    
+    
+    
           ListView.separated(
             padding: EdgeInsets.all(10),
             separatorBuilder: (BuildContext context, int index) {
@@ -117,13 +122,9 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
           ),
         ],
       ),
+      
 
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-        ),
-        onPressed: (){},
-      ),
+      
     );
   }
 

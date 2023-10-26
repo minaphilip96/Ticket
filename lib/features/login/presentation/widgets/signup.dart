@@ -7,23 +7,29 @@ import 'package:pop_app/core/constants.dart';
 //import 'package:my_app/core/widgets/custom_buttom.dart';
 import 'package:pop_app/core/widgets/text_labal.dart';
 import 'package:pop_app/features/login/presentation/login_view.dart';
-
+import 'package:pop_app/model/backend.dart';
+import 'package:pop_app/features/login/presentation/widgets/signup.dart';
 import '../../../../core/widgets/custom_buttom.dart';
 import '../../../HomePage/presentation/HomePage.dart';
 //import 'package:my_app/features/HomePage/presentation/HomePage.dart';
 //import 'package:get/get.dart';
+   final TextEditingController passwordTextController = TextEditingController();
+   final TextEditingController emailTextController = TextEditingController();
+   final TextEditingController userNameTextController = TextEditingController();
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  
+  
+   
+   SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
- 
+
 class _SignUpScreenState extends State<SignUpScreen> {
-   final TextEditingController _passwordTextController = TextEditingController();
-   final TextEditingController _emailTextController = TextEditingController();
-   final TextEditingController _userNameTextController = TextEditingController();
+   
+   
   @override
   Widget build(BuildContext context) {
         return Scaffold(
@@ -49,22 +55,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 20,
                 ),
                 reusableTextField("Enter UserName", Icons.person_outline, false,
-                    _userNameTextController),
+                    userNameTextController),
                 const SizedBox(
                   height: 20,
                 ),
                 reusableTextField("Enter Email ", Icons.person_outline, false,
-                    _emailTextController),
+                    emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
                 reusableTextField("Enter Password", Icons.lock_outlined, true,
-                    _passwordTextController),
+                    passwordTextController),
                 const SizedBox(
                   height: 20,
                 ),
               signinandsignup(context, false, (){
-                FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextController.text, password: _passwordTextController.text).then((value){
+                FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailTextController.text, password: passwordTextController.text).then((value){
+                     createuser(userNameTextController.text);
                      Get.to(()=> const LoginView(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
                 });
               })

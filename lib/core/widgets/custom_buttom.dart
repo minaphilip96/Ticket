@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/size_config.dart';
+import 'package:pop_app/model/backend.dart';
+import 'package:pop_app/features/login/presentation/widgets/signup.dart';
 
 
   
@@ -9,6 +11,7 @@ class CustomGeneralButton extends StatelessWidget {
   const CustomGeneralButton({super.key, this.text, this.onTap});
   final String? text;
   final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
       return GestureDetector( 
@@ -34,6 +37,7 @@ class CustomGeneralButton extends StatelessWidget {
         ),
       );
   }
+  
 }
 
 class Skip extends StatelessWidget {
@@ -53,8 +57,10 @@ class Skip extends StatelessWidget {
             ),
             textAlign: TextAlign.left
           ),
+          
   );
   }
+  
 }
 
 
@@ -69,6 +75,8 @@ Container signinandsignup(BuildContext context, bool isLogin, Function onTap) {
     child: ElevatedButton(
       onPressed: () {
         onTap();
+       
+        
       },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
