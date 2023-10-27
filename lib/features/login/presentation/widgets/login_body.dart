@@ -9,6 +9,7 @@ import 'package:pop_app/core/widgets/text_labal.dart';
 //import 'package:my_app/features/HomePage/presentation/HomePage.dart';
 import 'package:pop_app/features/login/presentation/widgets/signup.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/widgets/custom_buttom.dart';
 import '../../../HomePage/presentation/HomePage.dart';
@@ -22,8 +23,8 @@ class LoginBody extends StatefulWidget {
 
 class _LoginBodyState extends State<LoginBody> {
   GlobalKey<ScaffoldState> snackkey = GlobalKey<ScaffoldState>();
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,20 +45,22 @@ class _LoginBodyState extends State<LoginBody> {
             height: 30,
           ),
           reusableTextField("Enter Email", Icons.person_outline, false,
-              _emailTextController),
+              emailTextController),
           const SizedBox(
             height: 20,
           ),
           reusableTextField("Enter Password", Icons.lock_outline, true,
-              _passwordTextController),
+              passwordTextController),
           const SizedBox(
             height: 5,)
           ,const SizedBox(
             height: 20),
-            signinandsignup(context, true, (){
-              readuser(userid);
-              auth(_emailTextController, _passwordTextController,snackkey);
-              
+            signinandsignup(context, true, ()async{
+               final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                sharedPreferences.setString('email', emailTextController.text);
+              FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTextController.text, password: passwordTextController.text).then((value){
+               Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+              });
           },
             ) ,
             signUpOption()

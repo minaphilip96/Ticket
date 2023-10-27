@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'dart:math';
 
 import 'package:pop_app/core/utils/data.dart';
+import 'package:pop_app/features/Edit%20Profile/presentation/Edit_profile.dart';
+import 'package:pop_app/features/login/presentation/login_view.dart';
+import 'package:pop_app/features/login/presentation/widgets/signup.dart';
+import 'package:pop_app/features/splash/presentation/widgets/splash_body.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-
+String email=emailTextController.text;
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -52,69 +58,40 @@ class _ProfileState extends State<Profile> {
                 children: <Widget>[
                   TextButton(
                     child: Icon(
-                      Icons.message,
+                      Icons.logout_outlined,
                       color: Colors.white,
                     ),
-                    onPressed: (){},
+                    onPressed: ()async{
+                  final SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
+                  sharedPreferences.remove('email');
+                Get.to(()=> LoginView(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+
+                    },
                   ),
                   SizedBox(width: 10),
                   TextButton(
                     child: Icon(
-                      Icons.add,
+                      Icons.settings,
                       color: Colors.white,
                     ),
-                    onPressed: (){},
+                    onPressed: (){
+               Get.to(()=> Edit_profile(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+                    },
                   ),
 
                 ],
               ),
 
-              SizedBox(height: 40),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          random.nextInt(10000).toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Posts",
-                          style: TextStyle(
-                          ),
-                        ),
-                      ],
-                    ),
-
-
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          random.nextInt(10000).toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Groups",
-                          style: TextStyle(
-                          ),
-                        ),
-                      ],
-                    ),
-
+                   Container(child: Text('Email: $finalEmail',
+                   style: TextStyle(fontSize: 15,fontFamily: 'Monospace' ),
+                   )
+                   ,)
                   ],
                 ),
-              ),
             ],
                   ),
         ),
