@@ -117,13 +117,13 @@ class _ChatItemState extends State<ChatItem> {
           ],
         ),
         onTap: (){
-          Navigator.of(context, rootNavigator: true).push(
-            MaterialPageRoute(
-              builder: (BuildContext context){
-                return ChatBody();
-              },
-            ),
-          );
+          // Navigator.of(context, rootNavigator: true).push(
+          //   MaterialPageRoute(
+          //     builder: (BuildContext context){
+          //    //   return ChatBody();
+          //     },
+          //   ),
+          // );
         },
       ),
     );

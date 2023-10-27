@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
+import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/utils/size_config.dart';
 import 'package:pop_app/core/widgets/custom_buttom.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 import 'package:pop_app/model/backend.dart';
+
 
 class PostItem extends StatefulWidget {
   final String dp;
@@ -37,15 +40,20 @@ class _PostItemState extends State<PostItem> {
 
               contentPadding: EdgeInsets.all(0),
               title: Text(
-                "${widget.name}",
+                "${appcontroller.list_posts[widget.index].child("game").value}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  
                 ),  
+                
               ),
       
       trailing: GestureDetector( 
       onTap: (){
-      add_player(list_posts[widget.index].key);
+      appcontroller.add_player( appcontroller.list_posts[widget.index].key);
+      
+      // getmessages (list_posts[widget.index].key);
+      // message(list_posts[widget.index].key);
       },
       child: Container(
         height: 40,
@@ -54,17 +62,25 @@ class _PostItemState extends State<PostItem> {
           color: kMainColor,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Center(
-          child: Text(
-            'Ticket',
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xffffffff),
-              fontWeight: FontWeight.w500,
+        child: InkWell(
+          onTap: () {
+          appcontroller.add_player( appcontroller.list_posts[widget.index].key);
+          appcontroller.readgroupusers(appcontroller.list_posts[widget.index].key);
+           // message(list_posts[widget.index].key);
+            //listenOnMessages(posts[widget.index]);
+          },
+          child: Center(
+            child: Text(
+              'Ticket',
+              style: const TextStyle(
+                fontSize: 14,
+                color: Color(0xffffffff),
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.left,
+            )
             ),
-            textAlign: TextAlign.left,
-          )
-          ),
+        ),
         ),
       ),
               subtitle:

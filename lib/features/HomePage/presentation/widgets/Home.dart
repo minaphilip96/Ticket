@@ -5,6 +5,7 @@ import 'package:pop_app/core/utils/Loding.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/core/utils/posts.dart';
 import 'package:pop_app/features/Createpost/presentation/Create_post.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 import 'package:pop_app/model/backend.dart';
 
 
@@ -17,9 +18,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
       
-      setState(() {
-        getpost();
-      });
+      
+      appcontroller.getpost();
+     
     super.initState();
   }
   @override
@@ -39,21 +40,23 @@ class _HomeState extends State<Home> {
       ),
 
 
-      body:ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        itemCount: list_posts.length,
-        itemBuilder: (BuildContext context, int index) {
-
-          dynamic post = list_posts[index].value;
-          print(post);
-          return PostItem(
-            index: index,
-            img: post['img']??'',
-            name: post['owner']??'',
-            dp: post['body']??'',
-            time:getTheDifrrenceTime(post['time']??'')+' Min Ago'
-          );
-        },
+      body:GetBuilder<AppController>(
+        init: AppController(),
+       builder: (controller) =>  ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          itemCount:  controller.list_posts.length,
+          itemBuilder: (BuildContext context, int index) {
+      
+            dynamic post =  controller.list_posts[index].value;
+            return PostItem(
+              index: index,
+              img: post['img']??'',
+              name: post['owner']??'',
+              dp: post['body']??'',
+              time:getTheDifrrenceTime(post['time']??'')+' Min Ago'
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kMainColor,

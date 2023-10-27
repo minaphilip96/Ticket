@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pop_app/core/constants.dart';
+import 'package:pop_app/model/backend.dart';
+
+
 
 AppBar chatAppbar(context){
   return AppBar(
@@ -17,20 +20,16 @@ AppBar chatAppbar(context){
                   },
                   icon: Icon(Icons.arrow_back,color: kMainColor,),
                 ),
-                SizedBox(width: 2,),
-                CircleAvatar(
-                  maxRadius: 20,
-                backgroundImage: AssetImage(kIcon),
-                ),
                 SizedBox(width: 12,),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("Kriss Benwat",style: TextStyle( fontSize: 16 ,fontWeight: FontWeight.w600),),
+                      Text("Group chat"
+                      ,style: TextStyle( fontSize: 16 ,fontWeight: FontWeight.w600),),
                       SizedBox(height: 6,),
-                      Text("Online",style: TextStyle(color: Colors.grey.shade600, fontSize: 13),),
+                     
                     ],
                   ),
                 ),

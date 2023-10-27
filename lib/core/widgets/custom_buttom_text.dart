@@ -3,15 +3,23 @@ import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/ChatBubble.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
+import 'package:pop_app/model/backend.dart';
 
-class BottomText extends StatefulWidget {
-  const BottomText({super.key});
+class BottomTextPost extends StatefulWidget {
+  BottomTextPost({
+    Key? key,
+    required this.postID,
+     required this.scrollController,
+
+  }) : super(key: key);
+  String postID;
+    ScrollController scrollController;
 
   @override
-  State<BottomText> createState() => _BottomTextState();
+  State<BottomTextPost> createState() => _BottomTextPostState();
 }
 
-class _BottomTextState extends State<BottomText> {
+class _BottomTextPostState extends State<BottomTextPost> {
    final TextEditingController _messengeTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -48,11 +56,20 @@ class _BottomTextState extends State<BottomText> {
                         hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none
                       ),
+                      
                     ),
                   ),
                   SizedBox(width: 15,),
                   FloatingActionButton(
                     onPressed: (){
+                  if ( _messengeTextController.text!=""){    
+                 appcontroller.message(widget.postID, _messengeTextController.text,widget.scrollController);
+                 _messengeTextController.clear();
+                  }
+                  else {
+                      emptymessage();
+                  }
+
                       //Navigator.push(context,
                       //Material(builder: (context)=>ChatBubble(text: _messengeTextController.text.toString(), isCurrentUser: true))
                       //);

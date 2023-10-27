@@ -11,17 +11,17 @@ final PageController? pageController;
       children: const [
         PageViewitem(
           image: 'assets/images/intro1.png',
-          title: 'Open A TicKet',
-          subtitle: 'A Feature That Allows You To Talk To The Owner Of The Post',
+          title: 'Create A TicKet',
+          subtitle: 'An App That connects you with other people!',
         ),
         PageViewitem(
           image: 'assets/images/intro2.png',
           title: 'Games',
-          subtitle: 'The Most Popular games are available on the application',
+          subtitle: 'Your Most beloved games avalabilty is a top prioroty!',
         ),
         PageViewitem(
           image: 'assets/images/intro3.png',
-          title: 'Chat With Your Friend',
+          title: 'Chat With poeple who have the same intrests as you!',
           subtitle: 'You can chat with the owner of the post to play with him and make friends',
         )
       ],

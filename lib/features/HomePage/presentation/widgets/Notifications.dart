@@ -43,12 +43,7 @@ class _NotificationsState extends State<Notifications> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(
-                  notif['dp'],
-                ),
-                radius: 25,
-              ),
+              
 
               contentPadding: EdgeInsets.all(0),
               title: Text(notif['notif']),

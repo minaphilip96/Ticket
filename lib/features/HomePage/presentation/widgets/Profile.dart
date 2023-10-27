@@ -3,6 +3,8 @@ import 'package:pop_app/core/constants.dart';
 import 'dart:math';
 
 import 'package:pop_app/core/utils/data.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
+import 'package:pop_app/model/backend.dart';
 
 
 class Profile extends StatefulWidget {
@@ -33,7 +35,7 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 10),
               Text(
-                names[random.nextInt(10)],
+               appcontroller.  userdata["name"],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,

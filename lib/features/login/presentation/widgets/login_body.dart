@@ -24,6 +24,8 @@ class _LoginBodyState extends State<LoginBody> {
   GlobalKey<ScaffoldState> snackkey = GlobalKey<ScaffoldState>();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
+  var appcontroller=Get.put(AppController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +57,7 @@ class _LoginBodyState extends State<LoginBody> {
           ,const SizedBox(
             height: 20),
             signinandsignup(context, true, (){
-              readuser(userid);
+             appcontroller. readuser(appcontroller.userid);
               auth(_emailTextController, _passwordTextController,snackkey);
               
           },

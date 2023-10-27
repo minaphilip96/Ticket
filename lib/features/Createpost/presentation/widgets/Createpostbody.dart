@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/features/HomePage/presentation/HomePage.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 import 'package:pop_app/model/backend.dart';
 String gameValue="";
 var playerValue;
-const List<String> list = <String>['Valorant', 'Call of duty warzone', 'League of legends', 'Pubg mobile'];
+const List<String> list = <String>['Valorant', 'Call of duty', 'League of legends', 'Pubg mobile',"Fifa","Free fire"];
 const List<String> numbers = <String>['1', '2', '3', '4','5','6','7','8','9','10'];
  List<String> players = <String>[];
 
@@ -43,7 +44,7 @@ class _CreatePostBodyState extends State<CreatePostBody> {
         child: Center(
           child: TextButton(
             child: Text('POST',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-            onPressed: () => createpost(_postTextController.text, gameValue, dropdownValue),
+            onPressed: () => appcontroller.createpost(_postTextController.text, gameValue,playerValue),
             
             )
         ),
@@ -159,5 +160,10 @@ void select_game(item){
   else if (item=='Pubg mobile'){
      players= List.from(numbers.sublist(0,3));
   }
-  
+  else if (item=="Fifa"){
+     players= List.from(numbers.sublist(0,4));
+  }
+  else if (item=='Free fire'){
+     players= List.from(numbers.sublist(0,3));
+  }
 }

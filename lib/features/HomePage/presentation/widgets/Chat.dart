@@ -19,6 +19,7 @@ class _ChatsState extends State<Chats> with SingleTickerProviderStateMixin,
   @override
   void initState() {
     super.initState();
+
     _tabController = TabController(vsync: this, initialIndex: 0, length: 1);
   }
 

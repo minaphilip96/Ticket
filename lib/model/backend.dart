@@ -5,11 +5,21 @@ import 'package:flutter/material.dart';
 //firestore imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pop_app/core/constants.dart';
 import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/features/HomePage/presentation/HomePage.dart';
+import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
+ 
+List<dynamic> splitgroupid =[];
+List<dynamic> groupusersdata =[];
+String group_name= "";
+
+class AppController extends GetxController
+{
+
 var userid;
 var messageid;
-var postId;
+
 String ownerId = FirebaseAuth.instance.currentUser!.uid;
 List groupids= [];
 List <DataSnapshot> list_posts=[];
@@ -18,14 +28,13 @@ List <DataSnapshot> list_posts=[];
 
 
 
-void createpost (String body,String game, String players) {
-   
-  //create a new list everytime or no need?
+Future<void> createpost (String body,String game, String players) async {
+
 
   
-  final postsReference = FirebaseDatabase.instance.ref("posts");
+  final postsReference =   FirebaseDatabase.instance.ref("posts");
   DatabaseReference newpost= postsReference.push();
-  newpost
+ await newpost
   .set({
   "body":body,
   "owner":ownerId,
@@ -38,42 +47,31 @@ void createpost (String body,String game, String players) {
     
   
     final postbranchReference = FirebaseDatabase.instance.ref("${newpost.path}/group/members");
-    postbranchReference.set({
-      "owner":ownerId, //change to name 
+   await postbranchReference.set({
+      "owner":ownerId, 
       
 
     });
+
   Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
 
   }
 
- // void members(postId) {
- // final membersReference = FirebaseDatabase.instance.ref("/posts/$postId/members");
-  
- // membersReference.update({
- // "member1": "account id ",
-//});
-   
-
- // }
-
-//groups function and all its branches 
-
 
    
   
   
 
-Future<void> message(List groupids,postId) {
-  final messagesReference = FirebaseDatabase.instance.ref("posts/$postId/group/messages");//post id needs to be added
+Future<void> message(postId,text,ScrollController  scrollController) {
+  var messagesReference = FirebaseDatabase.instance.ref("posts/$postId/group/messages");
+ messagesReference= messagesReference.push();
   var userId = FirebaseAuth.instance.currentUser?.uid;
-  
   return messagesReference
   .set({
-  "text": "value",
-  "sender id ": userId,
-  "time": "value",
-});
+  "text": text,
+  "sender id": userId,
+  "time": DateTime.now().toString(),
+}).then((value) => scrollController.jumpTo(scrollController.position.maxScrollExtent));
   
   }
 
@@ -86,9 +84,9 @@ void  getpost() async {
     DataSnapshot posts = await FirebaseDatabase.instance.ref('posts').get();
          for (var element in posts.children) {
           list_posts.add(element);
-          print(list_posts.length);
+          print(list_posts.length); 
       }
-
+update();
 }
 
 List group = [];
@@ -103,7 +101,7 @@ void getgroup() async {
 
 }
 
-//END OF REALTIME DATABSE
+
 Future<void> createuser(String name){
 
 
@@ -111,10 +109,10 @@ CollectionReference users = FirebaseFirestore.instance.collection("users");
       return users
           .add({
             'name': name, 
-            'image': "value?",
-            'bio': "value" 
+            'bio': "value", 
           })
           .then((DocumentReference usersdocument) => userid=usersdocument.id)
+          
           .catchError((error) => print("Failed to add user: $error"));
     
 }
@@ -127,52 +125,118 @@ docRef.get().then(
   (DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     userdata=data;
-    print(userdata);
+    
+    
   },
 );
 }
-//FIRESTORE DATABASE
-var messages;
- dynamic messagesdata;
-void readmessages(messageid){
- messages = FirebaseFirestore.instance;
-final docRef = messages.collection("messages").doc(messageid);
+
+
+Future<void> readgroupusers(postId) async {
+print("hi");
+users = FirebaseFirestore.instance;
+DataSnapshot groups = await FirebaseDatabase.instance.ref("posts/$postId/group/members").get();
+splitgroupid=groups.child("group-id").value.toString().split("_");
+print(splitgroupid);
+for (var element in splitgroupid){
+final docRef = users.collection("users").doc(element);
 docRef.get().then(
   (DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    messagesdata=data;
+    userdata = data;
 
-    print(messagesdata["group-id"]);
+    groupusersdata.add(userdata["name"]);
+//print(groupusersdata[0]);
   },
+  
 );
+
+for(int i=0;  i<=groupusersdata.length-1 ;i++)
+  group_name+=groupusersdata[i];
 }
 
-void logic(playercount){
-if (messagesdata["group-id"].value.length==28){
-//Get to 
-add_player(postId);
+ print(group_name);
+}
 
-}
-else if (playercount ){ //condition to check the number of joined players and the required ones 
-//add whom presses on the button
-}
-}
+
 void add_player(postId)async{
  DataSnapshot groups = await FirebaseDatabase.instance.ref("posts/$postId/group/members").get();
  var playerid = FirebaseAuth.instance.currentUser?.uid;
- if (playerid==groups.child("owner").value){
-  //snackbar
+ if (groups.child("group-id").value.toString().contains(playerid!)){
+  Get.to(()=> ChatBody(postID: postId));
+  groupsnack (userdata);
  }
  else{
-  DataSnapshot groups = await FirebaseDatabase.instance.ref("posts/$postId/group/members").get();
-  groupids.add(groups.child("group-id").value);
-  String chatroomId =groups.child("group-id").value.toString()+"_$playerid";
-  chatroomId.replaceAll("null", ""); //look at dis
+  
+  
+  
+
+if (!groups.child("group-id").value.toString().contains(playerid)
+) {
+    String create_chatroomId =groups.child("group-id").value.toString()+"_$playerid";
+  String chatroomId = create_chatroomId.replaceAll("null_", ""); //look at dis
+  
   final messagesReference = FirebaseDatabase.instance.ref("posts/$postId/group/members");
-  messagesReference.set({
+ await messagesReference.set({
     "group-id":chatroomId,
   });
+}
+
+ Get.to(()=> ChatBody(postID: postId));
  
  }
   
 }
+List messages =[];
+
+void getmessages (postId,ScrollController scrollController) async{
+
+  messages.clear();
+  DataSnapshot messages_data = await FirebaseDatabase.instance.ref("posts/$postId/group/messages").get();
+  
+  for (var element in messages_data.children){
+       messages.add(element.value); 
+  }
+update();
+
+
+}
+
+
+void listenOnMessages(String postID) {
+ 
+  DatabaseReference reference = FirebaseDatabase.instance.ref('posts/$postID/group/messages');
+reference.onValue.listen((querySnapshot) {
+messages.add(querySnapshot.snapshot.children.last.value);
+update();
+});
+}
+}
+
+
+void emptymessage ()async{
+   
+  
+  Get.snackbar("Error","Can't send an empty message",
+  maxWidth:150 ,
+  snackPosition: SnackPosition.BOTTOM,
+  backgroundColor: kMainColor,
+  colorText: Colors.white,
+  );
+}
+String username ="";
+
+void groupsnack (userdata)async{
+  
+   username=userdata["name"];
+  
+  Get.snackbar("Dear $username","You are already a participant in the group",
+  maxWidth:250 ,
+  snackPosition: SnackPosition.BOTTOM,
+  backgroundColor: kMainColor,
+  colorText: Colors.white,
+  );
+}
+
+
+

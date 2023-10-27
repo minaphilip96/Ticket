@@ -16,7 +16,7 @@ import '../../../HomePage/presentation/HomePage.dart';
    final TextEditingController passwordTextController = TextEditingController();
    final TextEditingController emailTextController = TextEditingController();
    final TextEditingController userNameTextController = TextEditingController();
-
+var appcontroller=Get.put(AppController());
 class SignUpScreen extends StatefulWidget {
   
   
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               signinandsignup(context, false, (){
                 FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailTextController.text, password: passwordTextController.text).then((value){
-                     createuser(userNameTextController.text);
+                  appcontroller.   createuser(userNameTextController.text);
                      Get.to(()=> const LoginView(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
                 });
               })
