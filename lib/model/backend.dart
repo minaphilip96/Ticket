@@ -90,10 +90,7 @@ class AppController extends GetxController {
     DocumentReference users =
         FirebaseFirestore.instance.collection("users").doc(userid);
     await users
-        .set({
-          'name': name,
-          'bio': "",
-        })
+        .set({'name': name, 'bio': "", 'id': userid})
         .then((value) => null)
         .catchError((error) => print("Failed to add user: $error"));
   }
@@ -129,8 +126,10 @@ class AppController extends GetxController {
       final result = await docRef.get();
 
       final data = result.data();
+      print(data);
 
       groupusersdata.add(data);
+      print(groupusersdata);
     });
 
 //print(groupusersdata[0]);
