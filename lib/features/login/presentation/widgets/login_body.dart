@@ -21,56 +21,63 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  GlobalKey<ScaffoldState> snackkey = GlobalKey<ScaffoldState>();
+  // GlobalKey<ScaffoldState> snackkey = GlobalKey<ScaffoldState>();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
-  var appcontroller=Get.put(AppController());
+  var appcontroller = Get.put(AppController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: snackkey,
+      //key: snackkey,
       backgroundColor: kMainColor,
       body: SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-      child: Padding(
-      padding: EdgeInsets.fromLTRB(
-          20, MediaQuery.of(context).size.height * 0.02, 20, 0),
-      child: Column(
-        children: <Widget>[
-          const SizedBox(child: Text(""),height: 80,),
-          Image.asset(kLogo),
-           const SizedBox(
-            height: 30,
-          ),
-          reusableTextField("Enter Email", Icons.person_outline, false,
-              _emailTextController),
-          const SizedBox(
-            height: 20,
-          ),
-          reusableTextField("Enter Password", Icons.lock_outline, true,
-              _passwordTextController),
-          const SizedBox(
-            height: 5,)
-          ,const SizedBox(
-            height: 20),
-            signinandsignup(context, true, (){
-             appcontroller. readuser(appcontroller.userid);
-              auth(_emailTextController, _passwordTextController,snackkey);
-              
-          },
-            ) ,
-            signUpOption()
-          
-          ],
-          ),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                20, MediaQuery.of(context).size.height * 0.02, 20, 0),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 80,
+                  child: Text(""),
+                ),
+                Image.asset(kLogo),
+                const SizedBox(
+                  height: 30,
+                ),
+                reusableTextField("Enter Email", Icons.person_outline, false,
+                    _emailTextController),
+                const SizedBox(
+                  height: 20,
+                ),
+                reusableTextField("Enter Password", Icons.lock_outline, true,
+                    _passwordTextController),
+                const SizedBox(
+                  height: 5,
+                ),
+                const SizedBox(height: 20),
+                signinandsignup(
+                  context,
+                  true,
+                  () {
+                    auth(
+                      _emailTextController, _passwordTextController,
+                      //snackkey
+                    );
+                  },
+                ),
+                signUpOption()
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
   Row signUpOption() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,8 +86,9 @@ class _LoginBodyState extends State<LoginBody> {
             style: TextStyle(color: Colors.white70)),
         GestureDetector(
           onTap: () {
-                
-               Get.to(()=>  SignUpScreen(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
+            Get.to(() => SignUpScreen(),
+                transition: Transition.rightToLeft,
+                duration: const Duration(milliseconds: 500));
           },
           child: const Text(
             " Sign Up",
@@ -90,25 +98,28 @@ class _LoginBodyState extends State<LoginBody> {
       ],
     );
   }
- }  
-
-
-void auth (_emailTextController,_passwordTextController,snackkey)async{
-    try {
-  await FirebaseAuth.instance.signInWithEmailAndPassword(
-    email: _emailTextController.text,
-    password: _passwordTextController.text,
-  );
-  Get.to(()=> const homepage(),transition:Transition.rightToLeft,duration: const Duration(milliseconds: 500));
-} on FirebaseAuthException catch  (e) {
-  
-  Get.snackbar("ERROR" ,"Please Check Your E-mail And Password And Try Again,Check If You Registred With This E-mail",
-  icon: Icon(Icons.close,size: 40,color: Colors.white),
-  maxWidth: double.infinity,
-  snackPosition: SnackPosition.BOTTOM,
-  backgroundColor: Color.fromARGB(191, 124, 8, 0),
-  colorText: Colors.white,
-  );
 }
+
+void auth(emailTextController, passwordTextController) async {
+  try {
+    var userID = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailTextController.text,
+      password: passwordTextController.text,
+    );
+    appcontroller.ownerId = userID.user?.uid ?? '';
+    appcontroller.readuser();
+    Get.to(() => const homepage(),
+        transition: Transition.rightToLeft,
+        duration: const Duration(milliseconds: 500));
+  } on FirebaseAuthException {
+    Get.snackbar(
+      "ERROR",
+      "Please Check Your E-mail And Password And Try Again,Check If You Registred With This E-mail",
+      icon: const Icon(Icons.close, size: 40, color: Colors.white),
+      maxWidth: double.infinity,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: const Color.fromARGB(191, 124, 8, 0),
+      colorText: Colors.white,
+    );
+  }
 }
-        

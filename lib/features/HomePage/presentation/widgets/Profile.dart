@@ -6,8 +6,9 @@ import 'package:pop_app/core/utils/data.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 import 'package:pop_app/model/backend.dart';
 
-
 class Profile extends StatefulWidget {
+  const Profile({super.key});
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -18,62 +19,57 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-
-              SizedBox(height: 40),
-              CircleAvatar(
+              const SizedBox(height: 40),
+              const CircleAvatar(
                 backgroundImage: AssetImage(
                   kIcon,
                 ),
                 radius: 50,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-               appcontroller.  userdata["name"],
-                style: TextStyle(
+                appcontroller.userdata["name"],
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
               ),
-              SizedBox(height: 3),
-
+              const SizedBox(height: 3),
               Text(
-                "Status should be here",
-                style: TextStyle(
-                ),
+                appcontroller.userdata["bio"],
+                style: const TextStyle(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextButton(
-                    child: Icon(
+                    child: const Icon(
                       Icons.message,
                       color: Colors.white,
                     ),
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   TextButton(
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
-
                 ],
               ),
-
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -81,46 +77,41 @@ class _ProfileState extends State<Profile> {
                       children: <Widget>[
                         Text(
                           random.nextInt(10000).toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text(
+                        const SizedBox(height: 4),
+                        const Text(
                           "Posts",
-                          style: TextStyle(
-                          ),
+                          style: TextStyle(),
                         ),
                       ],
                     ),
-
-
                     Column(
                       children: <Widget>[
                         Text(
                           random.nextInt(10000).toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text(
+                        const SizedBox(height: 4),
+                        const Text(
                           "Groups",
-                          style: TextStyle(
-                          ),
+                          style: TextStyle(),
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
             ],
-                  ),
+          ),
         ),
       ),
     );
-                }
+  }
 }

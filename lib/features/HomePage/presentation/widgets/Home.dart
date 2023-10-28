@@ -8,8 +8,9 @@ import 'package:pop_app/features/Createpost/presentation/Create_post.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
 import 'package:pop_app/model/backend.dart';
 
-
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -17,64 +18,57 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-      
-      
-      appcontroller.getpost();
-     
+    appcontroller.getpost();
+
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Posts"),
+        title: const Text("Posts"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.filter_list,
             ),
-            onPressed: (){},
+            onPressed: () {},
           ),
         ],
       ),
-
-
-      body:GetBuilder<AppController>(
+      body: GetBuilder<AppController>(
         init: AppController(),
-       builder: (controller) =>  ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          itemCount:  controller.list_posts.length,
+        builder: (controller) => ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: controller.list_posts.length,
           itemBuilder: (BuildContext context, int index) {
-      
-            dynamic post =  controller.list_posts[index].value;
+            dynamic post = controller.list_posts[index].value;
             return PostItem(
-              index: index,
-              img: post['img']??'',
-              name: post['owner']??'',
-              dp: post['body']??'',
-              time:getTheDifrrenceTime(post['time']??'')+' Min Ago'
-            );
+                playersNumber: post['players'] ?? '',
+                index: index,
+                img: post['img'] ?? '',
+                name: post['owner'] ?? '',
+                dp: post['body'] ?? '',
+                time: '${getTheDifrrenceTime(post['time'] ?? '')} Min Ago');
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kMainColor,
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
-        onPressed : ()=>
+        onPressed: () =>
             //readuser(userid)
             //readmessages(messageid)
-            Get.to(()=> CreatePost()),
-        
+            Get.to(() => const CreatePost()),
       ),
     );
   }
 }
 
-String getTheDifrrenceTime(String time)
-{
- return DateTime.now().difference(DateTime.parse( time)).inMinutes.toString();
-  
+String getTheDifrrenceTime(String time) {
+  return DateTime.now().difference(DateTime.parse(time)).inMinutes.toString();
 }

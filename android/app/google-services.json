@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "337379432358",
-    "project_id": "ticket-56edd",
-    "storage_bucket": "ticket-56edd.appspot.com"
+    "project_number": "732904505089",
+    "firebase_url": "https://ticket-final-8e0b1-default-rtdb.firebaseio.com",
+    "project_id": "ticket-final-8e0b1",
+    "storage_bucket": "ticket-final-8e0b1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:337379432358:android:5275d39d9c1869f883a167",
+        "mobilesdk_app_id": "1:732904505089:android:883a5041a1ec24c070a500",
         "android_client_info": {
           "package_name": "com.example.pop_app"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBaWElJD1lpev35SbJE4FVhFcxvkUlLGGg"
+          "current_key": "AIzaSyBhWOIY1vNZdDsp-c9IxHgPPZ17V9E6eOA"
         }
       ],
       "services": {
