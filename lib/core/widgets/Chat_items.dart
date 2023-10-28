@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:pop_app/features/HomePage/presentation/widgets/Chat_Body.dart';
+import 'package:pop_app/features/login/presentation/widgets/Createpostbody.dart';
 
 
 class ChatItem extends StatefulWidget {
@@ -116,13 +119,13 @@ class _ChatItemState extends State<ChatItem> {
           ],
         ),
         onTap: (){
-          Navigator.of(context, rootNavigator: true).push(
-            MaterialPageRoute(
-              builder: (BuildContext context){
-                return ChatBody();
-              },
-            ),
-          );
+         // Navigator.of(context, rootNavigator: true).push(
+         //   MaterialPageRoute(
+         //     builder: (BuildContext context){
+          //      return ChatBody(postID:appcontroller.list_posts[widget.index].key);
+           //   },
+          //  ),
+         // );
         },
       ),
     );
